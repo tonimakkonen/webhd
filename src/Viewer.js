@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Byte from './Byte.js'
 
 class Viewer extends Component {
 
@@ -6,18 +7,14 @@ class Viewer extends Component {
     super(props);
   }
 
-  getHex2(value) {
-    var ret = value.toString(16);
-    if (ret.length == 1) {
-      ret = "0" + ret;
-    }
-    return ret;
-  }
-
   createDisplayData() {
     const bytes = [];
     for (var i=0; i < this.props.fileData.length; i++) {
-        bytes.push(this.getHex2(this.props.fileData[i]) + " ");
+      var value = this.props.fileData[i];
+      bytes.push(<Byte value={value} />);
+      if (value == 10 || value == 13) {
+        bytes.push((<br />));
+      }
     }
     return bytes;
   }
@@ -39,18 +36,6 @@ class Viewer extends Component {
       );
 
     }
-
-
-    return (
-      <div className="Viewer">
-      if (!this.props.fileLoaded) {
-          <p>No file loaded</p>
-      } else {
-        <p>File loaded: {this.props.fileData.length} </p>
-      }
-
-      </div>
-    );
   }
 }
 
