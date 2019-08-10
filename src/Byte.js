@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import './Byte.css';
-import './ByteHighBit.css';
 
 class Byte extends Component {
 
@@ -11,7 +10,6 @@ class Byte extends Component {
       binary: this.getBinary(this.props.value),
       ascii: this.getAscii(this.props.value),
       hex: this.getHex(this.props.value),
-      index: this.props.index,
     };
   }
 
@@ -28,6 +26,10 @@ class Byte extends Component {
       return String.fromCharCode(value);
     } else if (value == 32) {
       return " ";
+    } else if (value == 10) {
+      return "\\n";
+    } else if (value == 13) {
+      return "\\r";
     } else {
         return "...";
     }
@@ -44,26 +46,33 @@ class Byte extends Component {
     return ret;
   }
 
-  render() {
-    // TODO: Use less copy pasted code
-    if (this.props.value > 127) {
-      return (
-        <div className="ByteHighBit">
-        {this.state.ascii}
-        <br />
-        {this.state.hex}
-        </div>
-      );
-    } else {
-      return (
-        <div className="Byte">
-        {this.state.ascii}
-        <br />
-        {this.state.hex}
-        </div>
-      );
+  getBgColor(value) {
+    console.log(value);
+    // White space characters
+    if (value == 9 || value == 10 || value == 11 || value == 12 || value == 13
+      || value == 32) {
+        return "#ffffff";
     }
+    // constrol characters
+    if (value <= 31 || value == 127) {
+      return "fff0f0";
+    }
+    // Else based on high bit set or not
+    if (value < 127) {
+      return "#f0f0f0";
+    } else {
+      return "#f0f0ff";
+    }
+  }
 
+  render() {
+    return (
+      <div className="Byte" style={{backgroundColor:this.getBgColor(this.props.value)}}>
+      {this.state.ascii}
+      <br />
+      {this.state.hex}
+      </div>
+    );
   }
 }
 
