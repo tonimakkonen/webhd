@@ -47,17 +47,16 @@ class Byte extends Component {
   }
 
   getBgColor(value) {
-    console.log(value);
     // White space characters
     if (value == 9 || value == 10 || value == 11 || value == 12 || value == 13
       || value == 32) {
         return "#ffffff";
     }
-    // constrol characters
+    // constrol characters (that are not whitespace)
     if (value <= 31 || value == 127) {
       return "fff0f0";
     }
-    // Else based on high bit set or not
+    // Everything based on whether high bit set or not
     if (value < 127) {
       return "#f0f0f0";
     } else {
