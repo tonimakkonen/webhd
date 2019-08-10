@@ -1,5 +1,9 @@
 .Byte {
 
+    font-family: monospace;
+
+    min-width: 2em;
+
     margin: 0.25rem;
     padding: 0.25rem;
 

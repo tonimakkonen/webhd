@@ -11,6 +11,7 @@ class Byte extends Component {
       binary: this.getBinary(this.props.value),
       ascii: this.getAscii(this.props.value),
       hex: this.getHex(this.props.value),
+      index: this.props.index,
     };
   }
 
