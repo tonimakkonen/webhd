@@ -11,26 +11,23 @@ class Viewer extends Component {
   createDisplayData() {
     const bytes = [];
     var lineNumber = 1;
-    var lastChar = -1;
-    var needNewLine = false;
-    for (var i=0; i < this.props.fileData.length; i++) {
+    for (var i = 0; i < this.props.fileData.length; i++) {
       var value = this.props.fileData[i];
 
       // First line:
-      if (i == 0) {
-        bytes.push(<Line lineNumber={lineNumber} index={i} />);
+      if (i === 0) {
+        bytes.push(<Line lineNumber={lineNumber} index={i} key={"line"+lineNumber} />);
       }
 
       // We always push the current byte to the values
-      bytes.push(<Byte value={value} index={i} linenumber={lineNumber} />);
+      bytes.push(<Byte value={value} index={i} linenumber={lineNumber} key={"byte"+i} />);
 
-      if (value == 10 || value == 13) {
-        lineNumber = lineNumber + 1;
-        bytes.push(<br />);
-        bytes.push(<Line lineNumber={lineNumber} index={i} />);
+      // TODO: Hanlde cases where line end is marked by \n\r
+      if (value === 10 || value === 13) {
+        lineNumber += 1;
+        bytes.push(<br key={"br"+lineNumber}/>);
+        bytes.push(<Line lineNumber={lineNumber} index={i} key={"line"+lineNumber} />);
       }
-
-      lastChar = value;
     }
     return bytes;
   }

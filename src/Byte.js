@@ -14,7 +14,7 @@ class Byte extends Component {
   }
 
   getBinary(value) {
-    var str = new Number(value).toString(2);
+    var str = value.toString(2);
     if (str.length < 8) {
         str = "0".repeat(8-str.length) + str;
     }
@@ -24,11 +24,11 @@ class Byte extends Component {
   getAscii(value) {
     if (value >= 33 && value <= 126) {
       return String.fromCharCode(value);
-    } else if (value == 32) {
+    } else if (value === 32) {
       return " ";
-    } else if (value == 10) {
+    } else if (value === 10) {
       return "\\n";
-    } else if (value == 13) {
+    } else if (value === 13) {
       return "\\r";
     } else {
         return "...";
@@ -37,23 +37,20 @@ class Byte extends Component {
 
   getHex(value) {
     var ret = value.toString(16);
-    if (ret.length == 1) {
+    if (ret.length === 1) {
       ret = "0" + ret;
-    }
-    if (value == 10 || value == 16) {
-      ret = ret;
     }
     return ret;
   }
 
   getBgColor(value) {
     // White space characters
-    if (value == 9 || value == 10 || value == 11 || value == 12 || value == 13
-      || value == 32) {
+    if (value === 9 || value === 10 || value === 11 || value === 12 ||
+      value === 13 || value === 32) {
         return "#ffffff";
     }
     // constrol characters (that are not whitespace)
-    if (value <= 31 || value == 127) {
+    if (value <= 31 || value === 127) {
       return "fff0f0";
     }
     // Everything based on whether high bit set or not
