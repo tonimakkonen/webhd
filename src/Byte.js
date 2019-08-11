@@ -51,13 +51,13 @@ class Byte extends Component {
     }
     // constrol characters (that are not whitespace)
     if (value <= 31 || value === 127) {
-      return "fff0f0";
+      return "#ffe0e0";
     }
     // Everything based on whether high bit set or not
     if (value < 127) {
       return "#f0f0f0";
     } else {
-      return "#f0f0ff";
+      return "#e0e0ff";
     }
   }
 

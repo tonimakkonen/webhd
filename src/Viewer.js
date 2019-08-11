@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Byte from './Byte.js'
 import Line from './Line.js'
+import './Viewer.css';
 
 class Viewer extends Component {
 
@@ -37,13 +38,14 @@ class Viewer extends Component {
     if (!this.props.fileLoaded) {
       return (
         <div className="Viewer">
-        <p>No file loaded</p>
+        <div className="text">No file loaded</div>
         </div>
       );
     } else {
       return (
         <div className="Viewer">
-        <p>Size in bytes: {this.props.fileData.length}</p>
+        <div className="text">File: {this.props.filePath}</div>
+        <div className="text">Size in bytes: {this.props.fileData.length}</div>
         {this.createDisplayData()}
         </div>
       );
